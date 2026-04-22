@@ -22,7 +22,6 @@ const ThemedView = ({
 
   return (
     <View 
-      // className={`bg-light-background dark:bg-dark-background ${className}`}
       style={[
         { 
           backgroundColor: backgroundColor,

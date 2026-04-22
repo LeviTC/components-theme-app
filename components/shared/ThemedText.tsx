@@ -22,6 +22,7 @@ const ThemedText = ({
     "link": "underline text-blue-500 dark:text-blue-400",
   };
 
+  
   return (
     <Text 
       className={`text-light-text dark:text-dark-text ${textSize[type]} ${className}`}

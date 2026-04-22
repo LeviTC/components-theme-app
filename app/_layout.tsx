@@ -1,9 +1,8 @@
-import ThemedText from "@/components/shared/ThemedText";
-import ThemedView from "@/components/shared/ThemedView";
+import { allRoutes } from "@/constants/Routes";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
+import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "../global.css";
 
@@ -15,17 +14,23 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ backgroundColor, flex: 1 }}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <ThemedView safe margin>
-          <ThemedText 
-            // type="link"
-            className=" text-light-text text-2xl  dark:text-dark-text"
-          >
-            Hola mundo
-          </ThemedText>
+       <Stack
+        screenOptions={{
+          headerShadowVisible: false,
+          contentStyle: { backgroundColor  },
+          headerStyle: { backgroundColor },
+        }}
+       >
+          <Stack.Screen name="index" options={{ title: "" }} />
 
-        </ThemedView>
-        {/* <Stack /> */}
-        <StatusBar style="auto" />
+          {allRoutes.map((route) => (
+            <Stack.Screen 
+              key={route.name}
+              name={route.name}
+              options={{ title: route.title }}
+            />
+          ))}
+       </Stack>
       </ThemeProvider>
     </GestureHandlerRootView>
   );
