@@ -33,6 +33,7 @@ const Animation101Screen = () => {
             duration: 1000,
             useNativeDriver: true,
             easing: Easing.bounce,
+            initialValue: -100,
           });
         }}
       >

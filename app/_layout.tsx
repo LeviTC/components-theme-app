@@ -17,8 +17,10 @@ export default function RootLayout() {
        <Stack
         screenOptions={{
           headerShadowVisible: false,
-          contentStyle: { backgroundColor  },
+          contentStyle: { backgroundColor },
           headerStyle: { backgroundColor },
+          headerTintColor: useThemeColor({}, "primary"),
+          headerTitleStyle: { color: useThemeColor({}, "text") },
         }}
        >
           <Stack.Screen name="index" options={{ title: "" }} />
@@ -27,7 +29,9 @@ export default function RootLayout() {
             <Stack.Screen 
               key={route.name}
               name={route.name}
-              options={{ title: route.title }}
+              options={{ 
+                title: route.title,
+               }}
             />
           ))}
        </Stack>
