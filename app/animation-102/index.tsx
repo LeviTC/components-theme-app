@@ -1,9 +1,11 @@
+import { useThemeColor } from '@/hooks/useThemeColor';
 import React, { useRef } from 'react';
 import { Animated, PanResponder, StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const Animation102Screen = () => {
   const pan = useRef(new Animated.ValueXY()).current;
+  const boxColor = useThemeColor({}, "primary");
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -31,7 +33,7 @@ const Animation102Screen = () => {
       <SafeAreaView style={styles.container}>
         <Animated.View
           {...panResponder.panHandlers}
-          style={[pan.getLayout(), styles.box]}
+          style={[pan.getLayout(), styles.box, { backgroundColor: boxColor }]}
         />
       </SafeAreaView>
     </SafeAreaProvider>
@@ -45,7 +47,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   box: {
-    backgroundColor: '#61dafb',
     width: 80,
     height: 80,
     borderRadius: 4,
