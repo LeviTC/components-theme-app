@@ -4,6 +4,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import "../global.css";
 
 export default function RootLayout() {
@@ -13,29 +14,31 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ backgroundColor, flex: 1 }}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-       <Stack
-        screenOptions={{
-          headerShadowVisible: false,
-          contentStyle: { backgroundColor },
-          headerStyle: { backgroundColor },
-          headerTintColor: useThemeColor({}, "primary"),
-          headerTitleStyle: { color: useThemeColor({}, "text") },
-        }}
-       >
-          <Stack.Screen name="index" options={{ title: "" }} />
+      <KeyboardProvider>
+        <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack
+          screenOptions={{
+            headerShadowVisible: false,
+            contentStyle: { backgroundColor },
+            headerStyle: { backgroundColor },
+            headerTintColor: useThemeColor({}, "primary"),
+            headerTitleStyle: { color: useThemeColor({}, "text") },
+          }}
+        >
+            <Stack.Screen name="index" options={{ title: "" }} />
 
-          {allRoutes.map((route) => (
-            <Stack.Screen 
-              key={route.name}
-              name={route.name}
-              options={{ 
-                title: route.title,
-               }}
-            />
-          ))}
-       </Stack>
-      </ThemeProvider>
+            {allRoutes.map((route) => (
+              <Stack.Screen 
+                key={route.name}
+                name={route.name}
+                options={{ 
+                  title: route.title,
+                }}
+              />
+            ))}
+        </Stack>
+        </ThemeProvider>
+      </KeyboardProvider>
     </GestureHandlerRootView>
   );
 }
